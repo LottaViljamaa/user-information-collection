@@ -1,6 +1,7 @@
 package user.information.collection;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 import user.information.collection.userInformation.UserInformationCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -46,12 +47,16 @@ public class UserInformationController {
     @PutMapping("/update/{personalIdentityCode}")
     @ResponseStatus(HttpStatus.OK)
     public String updateUser(@PathVariable String personalIdentityCode, @RequestBody UserInformationCollection updatedUserDetails) {
-        boolean isUpdated = userInformationService.updateUser(personalIdentityCode, updatedUserDetails);
+        try {
+            boolean isUpdated = userInformationService.updateUser(personalIdentityCode, updatedUserDetails);
 
-        if (isUpdated) {
-            return "User updated successfully.";
-        } else {
-            return "User not found.";
+            if (isUpdated) {
+                return "User updated successfully.";
+            } else {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with the provided personal identity code.");
+            }
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 }
