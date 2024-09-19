@@ -43,4 +43,15 @@ public class UserInformationController {
         return "User removed successfully.";
     }
 
+    @PutMapping("/update/{personalIdentityCode}")
+    @ResponseStatus(HttpStatus.OK)
+    public String updateUser(@PathVariable String personalIdentityCode, @RequestBody UserInformationCollection updatedUserDetails) {
+        boolean isUpdated = userInformationService.updateUser(personalIdentityCode, updatedUserDetails);
+
+        if (isUpdated) {
+            return "User updated successfully.";
+        } else {
+            return "User not found.";
+        }
+    }
 }
