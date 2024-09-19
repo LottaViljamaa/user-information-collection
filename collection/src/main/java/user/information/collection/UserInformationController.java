@@ -27,4 +27,13 @@ public class UserInformationController {
         userInformationService.addUser(userDetails);
         return "User added successfully.";
     }
+
+    //Käyttäjän tietojen poistaminen
+    @DeleteMapping("/delete/{personalIdentityCode}")
+    @ResponseStatus(HttpStatus.OK)
+    public String removeUserByPersonalIdentityCode(@PathVariable String personalIdentityCode) {
+        userInformationService.removeUserByPersonalIdentityCode(personalIdentityCode);
+        return "User removed successfully.";
+    }
+
 }
