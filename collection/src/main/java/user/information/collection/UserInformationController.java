@@ -49,8 +49,12 @@ public class UserInformationController {
     @DeleteMapping("/delete/{personalIdentityCode}")
     @ResponseStatus(HttpStatus.OK)
     public String removeUserByPersonalIdentityCode(@PathVariable String personalIdentityCode) {
-        userInformationService.removeUserByPersonalIdentityCode(personalIdentityCode);
-        return "User removed successfully.";
+        try {
+            userInformationService.removeUserByPersonalIdentityCode(personalIdentityCode);
+            return "User removed successfully.";
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     @PutMapping("/update/{personalIdentityCode}")
