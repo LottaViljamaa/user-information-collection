@@ -25,7 +25,11 @@ public class UserInformationController {
     @GetMapping("/get/{personalIdentityCode}")
     @ResponseStatus(HttpStatus.OK)
     public UserInformationCollection getUserByPersonalIdentityCode(@PathVariable String personalIdentityCode) {
-        return userInformationService.getUserByPersonalIdentityCode(personalIdentityCode);
+        try {
+            return userInformationService.getUserByPersonalIdentityCode(personalIdentityCode);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
     }
 
     //Uuden käyttäjän lisäys
