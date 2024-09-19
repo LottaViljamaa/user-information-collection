@@ -20,6 +20,13 @@ public class UserInformationController {
         return userInformationService.getAllUsers();
     }
 
+    //Käyttäjätietojen hakeminen henkilötunnuksen perusteella
+    @GetMapping("/get/{personalIdentityCode}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserInformationCollection getUserByPersonalIdentityCode(@PathVariable String personalIdentityCode) {
+        return userInformationService.getUserByPersonalIdentityCode(personalIdentityCode);
+    }
+
     //Uuden käyttäjän lisäys
     @PutMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
