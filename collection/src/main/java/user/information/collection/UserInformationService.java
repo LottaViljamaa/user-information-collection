@@ -21,6 +21,19 @@ public class UserInformationService {
     public static final String USER_NOT_FOUND_MESSAGE = "User not found with the provided personal identity code.";
     public static final String DUPLICATE_ID_MESSAGE = "User with this identity code already exist.";
 
+    // Metodi kaikkien käyttäjien hakemiseksi
+    public List<UserInformationCollection> getAllUsers() {
+        return userDetailsList;
+    }
+
+    // Metodi käyttäjän tietojen hakemiselle henkilötunnuksen perusteella
+    public UserInformationCollection getUserByPersonalIdentityCode(String personalIdentityCode) {
+        return userDetailsList.stream()
+                .filter(user -> user.getBasicInformation().getPersonalIdentityCode().equals(personalIdentityCode))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(USER_NOT_FOUND_MESSAGE));
+    }
+
     // Metodi käyttäjän tietojen lisäämiseksi listaan
     public void addUser(UserInformationCollection userDetails) {
         String personalIdentityCode = userDetails.getBasicInformation().getPersonalIdentityCode();
@@ -28,11 +41,6 @@ public class UserInformationService {
             throw new IllegalArgumentException(DUPLICATE_ID_MESSAGE);
         }
         userDetailsList.add(userDetails);
-    }
-
-    // Metodi kaikkien käyttäjien hakemiseksi
-    public List<UserInformationCollection> getAllUsers() {
-        return userDetailsList;
     }
 
     // Metodi käyttäjän poistamiseksi henkilötunnuksen perusteella
@@ -62,13 +70,5 @@ public class UserInformationService {
         } else {
             throw new IllegalArgumentException(USER_NOT_FOUND_MESSAGE);
         }
-    }
-
-    // Metodi käyttäjän tietojen hakemiselle henkilötunnuksen perusteella
-    public UserInformationCollection getUserByPersonalIdentityCode(String personalIdentityCode) {
-        return userDetailsList.stream()
-                .filter(user -> user.getBasicInformation().getPersonalIdentityCode().equals(personalIdentityCode))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(USER_NOT_FOUND_MESSAGE));
     }
 }

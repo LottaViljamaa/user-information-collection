@@ -2,8 +2,6 @@ package user.information.collection;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
-import user.information.collection.userInformation.UserBasicInformation;
-import user.information.collection.userInformation.UserContactInformation;
 import user.information.collection.userInformation.UserInformationCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -45,6 +43,7 @@ public class UserInformationController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
+
     //Käyttäjän tietojen poistaminen
     @DeleteMapping("/delete/{personalIdentityCode}")
     @ResponseStatus(HttpStatus.OK)
