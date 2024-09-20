@@ -21,7 +21,7 @@
 
 Esimerkkirunko käyttäjätietojen lisäämistä varten: 
 
-```
+```JSON
 {
   "basicInformation": {
     "firstName": "Matti",
