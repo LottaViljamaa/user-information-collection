@@ -21,6 +21,7 @@
 
 Esimerkkirunko käyttäjätietojen lisäämistä varten: 
 
+```
 {
   "basicInformation": {
     "firstName": "Matti",
@@ -39,7 +40,7 @@ Esimerkkirunko käyttäjätietojen lisäämistä varten:
     "postalCode": "00000"
   }
 }
-
+```
 ![image](https://github.com/user-attachments/assets/710d24af-bb42-4184-876c-7269139be1e1)
 
 
