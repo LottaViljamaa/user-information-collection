@@ -1,43 +1,43 @@
 package user.information.collection;
 
-import user.information.collection.userInformation.UserBasicInformation;
-import user.information.collection.userInformation.UserContactInformation;
-import user.information.collection.userInformation.UserInformationCollection;
+import user.information.collection.userInformation.BasicInformation;
+import user.information.collection.userInformation.ContactInformation;
+import user.information.collection.userInformation.InformationCollection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static user.information.collection.UserInformationService.*;
+import static user.information.collection.InformationService.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 ;
 
 @SpringBootTest
-class UserInformationServiceTest {
+class InformationServiceTest {
 
-	private UserInformationService userRepository;
+	private InformationService userRepository;
 
 	@BeforeEach
 	public void setUp() {
-		userRepository = new UserInformationService();
+		userRepository = new InformationService();
 
-		UserBasicInformation basicInfo = new UserBasicInformation("Matti", "Meikäläinen", "010101-1234", "Suomi", "Mies");
-		UserContactInformation contactInfo = new UserContactInformation("010101-1234", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "00000");
-		UserInformationCollection user = new UserInformationCollection(basicInfo, contactInfo);
+		BasicInformation basicInfo = new BasicInformation("Matti", "Meikäläinen", "010101-1234", "Suomi", "Mies");
+		ContactInformation contactInfo = new ContactInformation("010101-1234", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "00000");
+		InformationCollection user = new InformationCollection(basicInfo, contactInfo);
 
 		userRepository.addUser(user);
 	}
 
 	@Test
 	public void Test_AddUser() {
-		UserBasicInformation basicInfo = new UserBasicInformation("Elli", "Esimerkki", "020202-6789", "Suomi", "Nainen");
-		UserContactInformation contactInfo = new UserContactInformation("020202-6789", "elli.esimerkki@esimerkki.com", "050-987654", "Ellikatu", "Esimerkki", "00500");
-		UserInformationCollection user = new UserInformationCollection(basicInfo, contactInfo);
+		BasicInformation basicInfo = new BasicInformation("Elli", "Esimerkki", "020202-6789", "Suomi", "Nainen");
+		ContactInformation contactInfo = new ContactInformation("020202-6789", "elli.esimerkki@esimerkki.com", "050-987654", "Ellikatu", "Esimerkki", "00500");
+		InformationCollection user = new InformationCollection(basicInfo, contactInfo);
 
 		userRepository.addUser(user);
-		List<UserInformationCollection> users = userRepository.getAllUsers();
+		List<InformationCollection> users = userRepository.getAllUsers();
 
 		assertEquals(2, users.size());
 		assertEquals(user, users.get(1));
@@ -48,7 +48,7 @@ class UserInformationServiceTest {
 	public void Test_RemoveUser() {
 		userRepository.removeUserByPersonalIdentityCode("010101-1234");
 
-		List<UserInformationCollection> users = userRepository.getAllUsers();
+		List<InformationCollection> users = userRepository.getAllUsers();
 		assertTrue(users.isEmpty());
 	}
 
@@ -68,13 +68,13 @@ class UserInformationServiceTest {
 	@Test
 	public void Test_UpdateUser() {
 
-		UserBasicInformation updatedBasicInfo = new UserBasicInformation("Matti", "Virtanen", "010101-1234", "Suomi", "Mies");
-		UserContactInformation updatedContactInfo = new UserContactInformation("010101-1234", "matti.virtanen@esimerkki.com", "040-987654", "Virtasenkatu", "Tampere", "33100");
-		UserInformationCollection updatedUser = new UserInformationCollection(updatedBasicInfo, updatedContactInfo);
+		BasicInformation updatedBasicInfo = new BasicInformation("Matti", "Virtanen", "010101-1234", "Suomi", "Mies");
+		ContactInformation updatedContactInfo = new ContactInformation("010101-1234", "matti.virtanen@esimerkki.com", "040-987654", "Virtasenkatu", "Tampere", "33100");
+		InformationCollection updatedUser = new InformationCollection(updatedBasicInfo, updatedContactInfo);
 
 		userRepository.updateUser("010101-1234", updatedUser);
 
-		UserInformationCollection fetchedUser = userRepository.getAllUsers().get(0);
+		InformationCollection fetchedUser = userRepository.getAllUsers().get(0);
 		assertEquals("Matti", fetchedUser.getBasicInformation().getFirstName());
 		assertEquals("Virtanen", fetchedUser.getBasicInformation().getSurname());
 		assertEquals("040-987654", fetchedUser.getContactInformation().getPhoneNumber());
@@ -85,9 +85,9 @@ class UserInformationServiceTest {
 	@Test
 	public void Test_UpdateUser_UserNotFoundByIdentityCode() {
 
-		UserBasicInformation updatedBasicInfo = new UserBasicInformation("Matti", "Virtanen", "020202-5678", "Suomi", "Mies");
-		UserContactInformation updatedContactInfo = new UserContactInformation("020202-5678", "matti.virtanen@esimerkki.com", "040-987654", "Virtasenkatu", "Tampere", "33100");
-		UserInformationCollection updatedUser = new UserInformationCollection(updatedBasicInfo, updatedContactInfo);
+		BasicInformation updatedBasicInfo = new BasicInformation("Matti", "Virtanen", "020202-5678", "Suomi", "Mies");
+		ContactInformation updatedContactInfo = new ContactInformation("020202-5678", "matti.virtanen@esimerkki.com", "040-987654", "Virtasenkatu", "Tampere", "33100");
+		InformationCollection updatedUser = new InformationCollection(updatedBasicInfo, updatedContactInfo);
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			userRepository.updateUser("999999-9999", updatedUser);
@@ -97,7 +97,7 @@ class UserInformationServiceTest {
 	@Test
 	public void Test_GetUserByPersonalIdentityCode() {
 
-		UserInformationCollection foundUser = userRepository.getUserByPersonalIdentityCode("010101-1234");
+		InformationCollection foundUser = userRepository.getUserByPersonalIdentityCode("010101-1234");
 
 		assertNotNull(foundUser);
 		assertEquals("Matti", foundUser.getBasicInformation().getFirstName());
@@ -122,13 +122,13 @@ class UserInformationServiceTest {
 
 	@Test
 	public void Test_AddUser_DuplicatePersonalIdentityCode() {
-		UserBasicInformation basicInfo = new UserBasicInformation("Matti", "Meikäläinen", "010101-1234", "Suomi", "Mies");
-		UserContactInformation contactInfo = new UserContactInformation("010101-1234", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "00000");
-		UserInformationCollection user = new UserInformationCollection(basicInfo, contactInfo);
+		BasicInformation basicInfo = new BasicInformation("Matti", "Meikäläinen", "010101-1234", "Suomi", "Mies");
+		ContactInformation contactInfo = new ContactInformation("010101-1234", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "00000");
+		InformationCollection user = new InformationCollection(basicInfo, contactInfo);
 
 		IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
 			userRepository.addUser(user);
 		});
-		assertEquals(UserInformationService.DUPLICATE_ID_MESSAGE, thrown.getMessage());
+		assertEquals(InformationService.DUPLICATE_ID_MESSAGE, thrown.getMessage());
 	}
 }

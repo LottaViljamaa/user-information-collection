@@ -1,6 +1,6 @@
 package user.information.collection.userInformation;
 
-public class UserContactInformation {
+public class ContactInformation {
 
     public static final String ILLEGAL_EMAIL_FORMAT = "Invalid email address.";
     public static final String ILLEGAL_PHONE_NUMBER = "Invalid phone number.";
@@ -14,7 +14,7 @@ public class UserContactInformation {
     private String city;
     private String postalCode;
 
-    public UserContactInformation(String personalIdentityCode, String email, String phoneNumber, String streetAddress, String city, String postalCode) {
+    public ContactInformation(String personalIdentityCode, String email, String phoneNumber, String streetAddress, String city, String postalCode) {
         setPersonalIdentityCode(personalIdentityCode);
         setEmail(email);
         setPhoneNumber(phoneNumber);

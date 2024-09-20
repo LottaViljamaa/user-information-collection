@@ -1,28 +1,28 @@
 package user.information.collection.userInformation;
 
-public class UserInformationCollection {
+public class InformationCollection {
 
-    private UserBasicInformation basicInformation;
-    private UserContactInformation contactInformation;
+    private BasicInformation basicInformation;
+    private ContactInformation contactInformation;
 
-    public UserInformationCollection(UserBasicInformation basicInformation, UserContactInformation contactInformation) {
+    public InformationCollection(BasicInformation basicInformation, ContactInformation contactInformation) {
         this.basicInformation = basicInformation;
         this.contactInformation = contactInformation;
     }
 
-    public UserBasicInformation getBasicInformation() {
+    public BasicInformation getBasicInformation() {
         return basicInformation;
     }
 
-    public void setBasicInformation(UserBasicInformation basicInformation) {
+    public void setBasicInformation(BasicInformation basicInformation) {
         this.basicInformation = basicInformation;
     }
 
-    public UserContactInformation getContactInformation() {
+    public ContactInformation getContactInformation() {
         return contactInformation;
     }
 
-    public void setContactInformation(UserContactInformation contactInformation) {
+    public void setContactInformation(ContactInformation contactInformation) {
         this.contactInformation = contactInformation;
     }
 

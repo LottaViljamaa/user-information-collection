@@ -1,6 +1,6 @@
 package user.information.collection;
 
-import user.information.collection.userInformation.UserInformationCollection;
+import user.information.collection.userInformation.InformationCollection;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserInformationService {
+public class InformationService {
 
     // Lista käyttäjän tiedoille
-    private List<UserInformationCollection> userDetailsList;
+    private List<InformationCollection> userDetailsList;
 
-    public UserInformationService() {
+    public InformationService() {
         // Alustetaan lista
         this.userDetailsList = new ArrayList<>();
     }
@@ -22,12 +22,12 @@ public class UserInformationService {
     public static final String DUPLICATE_ID_MESSAGE = "User with this identity code already exist.";
 
     // Metodi kaikkien käyttäjien hakemiseksi
-    public List<UserInformationCollection> getAllUsers() {
+    public List<InformationCollection> getAllUsers() {
         return userDetailsList;
     }
 
     // Metodi käyttäjän tietojen hakemiselle henkilötunnuksen perusteella
-    public UserInformationCollection getUserByPersonalIdentityCode(String personalIdentityCode) {
+    public InformationCollection getUserByPersonalIdentityCode(String personalIdentityCode) {
         return userDetailsList.stream()
                 .filter(user -> user.getBasicInformation().getPersonalIdentityCode().equals(personalIdentityCode))
                 .findFirst()
@@ -35,7 +35,7 @@ public class UserInformationService {
     }
 
     // Metodi käyttäjän tietojen lisäämiseksi listaan
-    public void addUser(UserInformationCollection userDetails) {
+    public void addUser(InformationCollection userDetails) {
         String personalIdentityCode = userDetails.getBasicInformation().getPersonalIdentityCode();
         if (userDetailsList.stream().anyMatch(user -> user.getBasicInformation().getPersonalIdentityCode().equals(personalIdentityCode))) {
             throw new IllegalArgumentException(DUPLICATE_ID_MESSAGE);
@@ -45,7 +45,7 @@ public class UserInformationService {
 
     // Metodi käyttäjän poistamiseksi henkilötunnuksen perusteella
     public boolean removeUserByPersonalIdentityCode(String personalIdentityCode) {
-        Optional<UserInformationCollection> userToRemove = userDetailsList.stream()
+        Optional<InformationCollection> userToRemove = userDetailsList.stream()
                 .filter(user -> user.getBasicInformation().getPersonalIdentityCode().equals(personalIdentityCode))
                 .findFirst();
 
@@ -58,8 +58,8 @@ public class UserInformationService {
     }
 
     // Metodi käyttäjän tietojen päivittämiseksi henkilötunnuksen perusteella
-    public boolean updateUser(String personalIdentityCode, UserInformationCollection updatedUserDetails) {
-        Optional<UserInformationCollection> userToUpdate = userDetailsList.stream()
+    public boolean updateUser(String personalIdentityCode, InformationCollection updatedUserDetails) {
+        Optional<InformationCollection> userToUpdate = userDetailsList.stream()
                 .filter(user -> user.getBasicInformation().getPersonalIdentityCode().equals(personalIdentityCode))
                 .findFirst();
 

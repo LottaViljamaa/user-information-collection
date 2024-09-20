@@ -1,6 +1,6 @@
 package user.information.collection.userInformation;
 
-public class UserBasicInformation {
+public class BasicInformation {
 
     public static final String ILLEGAL_NAME_FORMAT = "Name can only contain letters and the '-' character.";
     public static final String ILLEGAL_ID_FORMAT = "Invalid personal identity code.";
@@ -12,7 +12,7 @@ public class UserBasicInformation {
     private String citizenship;
     private String gender;
 
-    public UserBasicInformation(String firstName, String surname, String personalIdentityCode, String citizenship, String gender) {
+    public BasicInformation(String firstName, String surname, String personalIdentityCode, String citizenship, String gender) {
         setFirstName(firstName);
         setSurname(surname);
         setPersonalIdentityCode(personalIdentityCode);
