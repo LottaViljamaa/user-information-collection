@@ -41,6 +41,7 @@ Esimerkkirunko käyttäjätietojen lisäämistä varten:
   }
 }
 ```
-![image](https://github.com/user-attachments/assets/710d24af-bb42-4184-876c-7269139be1e1)
+![image](https://github.com/user-attachments/assets/1f4ca9d2-9f97-4c27-bc3e-c9d8fa7ad0a5)
+
 
 
