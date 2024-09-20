@@ -55,7 +55,6 @@ public class InformationControllerTest {
                 .andExpect(content().json(objectMapper.writeValueAsString(mockUser)));
     }
 
-    /*
     @Test
     public void testGetUserByPersonalIdentityCode_NotFound() throws Exception {
         given(userInformationService.getUserByPersonalIdentityCode("999999-8888"))
@@ -63,13 +62,7 @@ public class InformationControllerTest {
 
         mockMvc.perform(get("/users/get/999999-8888")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound())
-                .andExpect(result -> {
-                    String responseBody = result.getResponse().getContentAsString();
-                    assertTrue(responseBody.contains("User not found with the provided personal identity code."));
-                });    }
-
-
-     */
+                .andExpect(status().isNotFound());
+    }
 }
 
