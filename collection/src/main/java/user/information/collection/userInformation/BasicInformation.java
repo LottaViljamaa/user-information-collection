@@ -104,10 +104,6 @@ public class BasicInformation {
         return code.matches("\\d{6}-\\d{4}");
     }
 
-    public String getFullName() {
-        return firstName + " " + surname;
-    }
-
     @Override
     public String toString() {
         return "Full Name: " + firstName + " " + surname +
