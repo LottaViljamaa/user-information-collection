@@ -1,7 +1,6 @@
 # Henkilötietojärjestelmä
-> [!CAUTION]
-> Älä tallenna järjestelmään omia tai muiden henkilöiden tietoja!
-
+## Huomio
+Älä tallenna järjestelmään omia tai muiden henkilöiden tietoja!
 #### 
 Tämän sovelluksen kehitystyö on vielä kesken. Alla kuitenkin tiedot nykyisestä sovelluksesta.
 
