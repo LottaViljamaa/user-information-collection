@@ -1,4 +1,8 @@
 # Henkilötietojärjestelmä
+
+#### 
+Tämän sovelluksen kehitystyö on vielä kesken. Alla kuitenkin tiedot nykyisestä sovelluksesta.
+
 ### Yleistä
 - Yksinkertainen ohjelmisto henkilötietojen tallentamiseksi ilman tietokantayhteyttä
 - Sovelluksen backend on toteutettu Java + Spring Boot + Maven
