@@ -1,14 +1,19 @@
 # Henkilötietojärjestelmä
+## Huomio
+Älä tallenna järjestelmään omia tai muiden henkilöiden tietoja!
+#### 
+Tämän sovelluksen kehitystyö on vielä kesken. Alla kuitenkin tiedot nykyisestä sovelluksesta.
+
 ### Yleistä
 - Yksinkertainen ohjelmisto henkilötietojen tallentamiseksi ilman tietokantayhteyttä
 - Sovelluksen backend on toteutettu Java + Spring Boot + Maven
 - Sovelluksessa on käytössä Unit5 yksikkötestit
 - "UserInformation" -kansiossa on logiikka tietojen tallentamiselle ja validoimiselle.
 - "UserInformationService" -luokassa on toteutettu tietojen tallentamisen, hakemisen, muokkaamisen ja poistamisen logiikka.
-- "UserInformationController" -luokassa käsitellään HTTP-pyyntöjä niiden virhetilanteita
+- "UserInformationController" -luokassa käsitellään HTTP-pyyntöjä ja pyyntejön virhetilanteita
 
 ### Ohjeet sovelluksen avaamiselle
-1. Kloonaa repositorio: git clone https://github.com/LottaViljamaa/user-information-collection.git
+1. Kloonaa repositorio
 2. Suorita maven clean ja install
 3. Käynnistä sovellus
 
@@ -43,5 +48,9 @@ Esimerkkirunko käyttäjätietojen lisäämistä varten:
 ```
 ![image](https://github.com/user-attachments/assets/1f4ca9d2-9f97-4c27-bc3e-c9d8fa7ad0a5)
 
+####
+Kehityskohteita: 
+- Koodin jäsentely
+- Unit -testien lisääminen HTTP -pyynnöille
 
 
