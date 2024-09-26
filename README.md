@@ -2,6 +2,9 @@
 
 #### 
 Tämän sovelluksen kehitystyö on vielä kesken. Alla kuitenkin tiedot nykyisestä sovelluksesta.
+Kehityskohteita: 
+- Koodin jäsentely
+- Unit testien lisääminen HTTP -pyynnöille
 
 ### Yleistä
 - Yksinkertainen ohjelmisto henkilötietojen tallentamiseksi ilman tietokantayhteyttä
@@ -9,7 +12,7 @@ Tämän sovelluksen kehitystyö on vielä kesken. Alla kuitenkin tiedot nykyises
 - Sovelluksessa on käytössä Unit5 yksikkötestit
 - "UserInformation" -kansiossa on logiikka tietojen tallentamiselle ja validoimiselle.
 - "UserInformationService" -luokassa on toteutettu tietojen tallentamisen, hakemisen, muokkaamisen ja poistamisen logiikka.
-- "UserInformationController" -luokassa käsitellään HTTP-pyyntöjä niiden virhetilanteita
+- "UserInformationController" -luokassa käsitellään HTTP-pyyntöjä ja pyyntejön virhetilanteita
 
 ### Ohjeet sovelluksen avaamiselle
 1. Kloonaa repositorio: git clone https://github.com/LottaViljamaa/user-information-collection.git
