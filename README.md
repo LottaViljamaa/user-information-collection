@@ -2,6 +2,8 @@
 
 #### 
 Tämän sovelluksen kehitystyö on vielä kesken. Alla kuitenkin tiedot nykyisestä sovelluksesta.
+
+####
 Kehityskohteita: 
 - Koodin jäsentely
 - Unit testien lisääminen HTTP -pyynnöille
