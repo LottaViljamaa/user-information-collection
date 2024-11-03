@@ -1,4 +1,4 @@
-# Henkilötietojärjestelmä
+# Henkilötietojärjestelmä - taustapalvelu
 
 Read the readme in English: [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/LottaViljamaa/user-information-collection-rest/blob/main/README.eng.md)
 
