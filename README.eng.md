@@ -1,6 +1,6 @@
 # User Information Application 
 
-Open the readme in Finnish language: [![fin](https://img.shields.io/badge/lang-fin-red.svg)](https://github.com/LottaViljamaa/user-information-collection-rest/blob/main/README.md)
+Read the readme in Finnish: [![fin](https://img.shields.io/badge/lang-fin-red.svg)](https://github.com/LottaViljamaa/user-information-collection-rest/blob/main/README.md)
 
 ## Caution
 Do not store your own or others' personal information in this application!
