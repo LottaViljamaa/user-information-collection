@@ -1,4 +1,4 @@
-# User Information Application 
+# User Information Application - backend
 
 Read the readme in Finnish: [![fin](https://img.shields.io/badge/lang-fin-red.svg)](https://github.com/LottaViljamaa/user-information-collection-rest/blob/main/README.md)
 
