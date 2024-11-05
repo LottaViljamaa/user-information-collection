@@ -1,6 +1,7 @@
 package user.information.collection;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 import user.information.collection.userInformation.InformationCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,58 +18,60 @@ public class InformationController {
 
     //Kaikkien käyttäjien tietojen hakeminen
     @GetMapping("/all")
-    public List<InformationCollection> findUsers() {
-        return userInformationService.getAllUsers();
+    public ResponseEntity<List<InformationCollection>> findUsers() {
+        List<InformationCollection> users = userInformationService.getAllUsers();
+        return ResponseEntity.ok(users);
     }
-
     //Käyttäjätietojen hakeminen henkilötunnuksen perusteella
     @GetMapping("/get/{personalIdentityCode}")
-    @ResponseStatus(HttpStatus.OK)
-    public InformationCollection getUserByPersonalIdentityCode(@PathVariable String personalIdentityCode) {
+    public ResponseEntity<?> getUserByPersonalIdentityCode(@PathVariable String personalIdentityCode) {
         try {
-            return userInformationService.getUserByPersonalIdentityCode(personalIdentityCode);
+            InformationCollection user = userInformationService.getUserByPersonalIdentityCode(personalIdentityCode);
+            return ResponseEntity.ok(user);
         } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("{\"error\": \"" + e.getMessage() + "\"}");
         }
     }
 
     //Uuden käyttäjän lisäys
     @PutMapping("/add")
-    @ResponseStatus(HttpStatus.CREATED)
-    public String addUser(@RequestBody InformationCollection userDetails) {
+    public ResponseEntity<String> addUser(@RequestBody InformationCollection userDetails) {
         try {
             userInformationService.addUser(userDetails);
-            return "User added successfully.";
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("{\"message\": \"User added successfully.\"}");
         } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("{\"error\": \"" + e.getMessage() + "\"}");
         }
     }
 
     //Käyttäjän tietojen poistaminen
     @DeleteMapping("/delete/{personalIdentityCode}")
-    @ResponseStatus(HttpStatus.OK)
-    public String removeUserByPersonalIdentityCode(@PathVariable String personalIdentityCode) {
+    public ResponseEntity<String> removeUserByPersonalIdentityCode(@PathVariable String personalIdentityCode) {
         try {
             userInformationService.removeUserByPersonalIdentityCode(personalIdentityCode);
-            return "User removed successfully.";
+            return ResponseEntity.ok("{\"message\": \"User removed successfully.\"}");
         } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("{\"error\": \"" + e.getMessage() + "\"}");
         }
     }
 
     @PutMapping("/update/{personalIdentityCode}")
-    @ResponseStatus(HttpStatus.OK)
-    public String updateUser(@PathVariable String personalIdentityCode, @RequestBody InformationCollection updatedUserDetails) {
+    public ResponseEntity<String> updateUser(@PathVariable String personalIdentityCode, @RequestBody InformationCollection updatedUserDetails) {
         try {
             boolean isUpdated = userInformationService.updateUser(personalIdentityCode, updatedUserDetails);
-
             if (isUpdated) {
-                return "User updated successfully.";
+                return ResponseEntity.ok("{\"message\": \"User updated successfully.\"}");
             } else {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with the provided personal identity code.");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("{\"error\": \"User not found with the provided personal identity code.\"}");
             }
         } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("{\"error\": \"" + e.getMessage() + "\"}");
         }
     }
 }
