@@ -40,16 +40,16 @@ public class InformationControllerTest {
     @BeforeEach
     void setUp() {
         mockUser = new InformationCollection(
-                new BasicInformation("Matti", "Meikäläinen", "010101-1234", "Suomi", "Mies"),
-                new ContactInformation("010101-1234", "matti.meikalainen@esimerkki.com", "1234567890", "Esimerkkikatu", "Esimerkki", "00100")
+                new BasicInformation("Matti", "Meikäläinen", "010101", "Suomi", "Mies"),
+                new ContactInformation("010101", "matti.meikalainen@esimerkki.com", "1234567890", "Esimerkkikatu", "Esimerkki", "00100")
         );
     }
 
     @Test
     public void testGetUserByPersonalIdentityCode_Success() throws Exception {
-        given(userInformationService.getUserByPersonalIdentityCode("010101-1234")).willReturn(mockUser);
+        given(userInformationService.getUserByPersonalIdentityCode("010101")).willReturn(mockUser);
 
-        mockMvc.perform(get("/users/get/010101-1234")
+        mockMvc.perform(get("/users/get/010101")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(mockUser)));
@@ -57,10 +57,10 @@ public class InformationControllerTest {
 
     @Test
     public void testGetUserByPersonalIdentityCode_NotFound() throws Exception {
-        given(userInformationService.getUserByPersonalIdentityCode("999999-8888"))
+        given(userInformationService.getUserByPersonalIdentityCode("999999"))
                 .willThrow(new IllegalArgumentException("User not found with the provided personal identity code."));
 
-        mockMvc.perform(get("/users/get/999999-8888")
+        mockMvc.perform(get("/users/get/999999")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }

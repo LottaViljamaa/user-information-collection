@@ -25,8 +25,8 @@ class BasicInformationTest {
     public void Test_AddUser_InvalidFirstNameFormat() {
         assertThrows(IllegalArgumentException.class, () -> {
             InformationCollection user = new InformationCollection(
-                    new BasicInformation("Matti123", "Meikäläinen", "010101-1234", "Suomi", "Mies"),
-                    new ContactInformation("010101-1234", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
+                    new BasicInformation("Matti123", "Meikäläinen", "010101", "Suomi", "Mies"),
+                    new ContactInformation("010101", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
             );
             IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
                 userRepository.addUser(user);;
@@ -39,8 +39,8 @@ class BasicInformationTest {
     public void Test_AddUser_InvalidSureNameFormat() {
         assertThrows(IllegalArgumentException.class, () -> {
             InformationCollection user = new InformationCollection(
-                    new BasicInformation("Matti", "Meikäläinen123", "010101-1234", "Suomi", "Mies"),
-                    new ContactInformation("010101-1234", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
+                    new BasicInformation("Matti", "Meikäläinen123", "010101", "Suomi", "Mies"),
+                    new ContactInformation("010101", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
             );
             IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
                 userRepository.addUser(user);;
@@ -53,22 +53,8 @@ class BasicInformationTest {
     public void Test_AddUser_IllegalPersonalIdentityCodeFormat_ContainLetters() {
         assertThrows(IllegalArgumentException.class, () -> {
             InformationCollection user = new InformationCollection(
-                    new BasicInformation("Matti", "Meikäläinen", "abcdef-1234", "Suomi", "Mies"),
-                    new ContactInformation("abcdef-1234", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
-            );
-            IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-                userRepository.addUser(user);;
-            });
-            assertEquals(ILLEGAL_ID_FORMAT, thrown.getMessage());
-        });
-    }
-
-    @Test
-    public void Test_AddUser_IllegalPersonalIdentityCodeFormat_NoPunctuationMark() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            InformationCollection user = new InformationCollection(
-                    new BasicInformation("Matti", "Meikäläinen", "01010191234", "Suomi", "Mies"),
-                    new ContactInformation("01010191234", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
+                    new BasicInformation("Matti", "Meikäläinen", "abcdef", "Suomi", "Mies"),
+                    new ContactInformation("abcdef", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
             );
             IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
                 userRepository.addUser(user);;
@@ -81,8 +67,8 @@ class BasicInformationTest {
     public void Test_AddUser_IllegalPersonalIdentityCodeFormat_IdTooShort() {
         assertThrows(IllegalArgumentException.class, () -> {
             InformationCollection user = new InformationCollection(
-                    new BasicInformation("Matti", "Meikäläinen", "010101-123", "Suomi", "Mies"),
-                    new ContactInformation("010101-123", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
+                    new BasicInformation("Matti", "Meikäläinen", "01010", "Suomi", "Mies"),
+                    new ContactInformation("01010", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
             );
             IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
                 userRepository.addUser(user);;
@@ -95,8 +81,8 @@ class BasicInformationTest {
     public void Test_AddUser_FieldEmpty_FirstName() {
         assertThrows(IllegalArgumentException.class, () -> {
             InformationCollection user = new InformationCollection(
-                    new BasicInformation("", "Meikäläinen", "010101-1234", "Suomi", "Mies"),
-                    new ContactInformation("010101-1234", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
+                    new BasicInformation("", "Meikäläinen", "010101", "Suomi", "Mies"),
+                    new ContactInformation("010101", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
             );
             IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
                 userRepository.addUser(user);;
@@ -109,8 +95,8 @@ class BasicInformationTest {
     public void Test_AddUser_FieldEmpty_Surname() {
         assertThrows(IllegalArgumentException.class, () -> {
             InformationCollection user = new InformationCollection(
-                    new BasicInformation("Matti", "", "010101-1234", "Suomi", "Mies"),
-                    new ContactInformation("010101-1234", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
+                    new BasicInformation("Matti", "", "010101", "Suomi", "Mies"),
+                    new ContactInformation("010101", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
             );
             IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
                 userRepository.addUser(user);;
@@ -124,7 +110,7 @@ class BasicInformationTest {
         assertThrows(IllegalArgumentException.class, () -> {
             InformationCollection user = new InformationCollection(
                     new BasicInformation("Matti", "Meikäläinen", "", "Suomi", "Mies"),
-                    new ContactInformation("010101-1234", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
+                    new ContactInformation("010101", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
             );
             IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
                 userRepository.addUser(user);;
@@ -137,8 +123,8 @@ class BasicInformationTest {
     public void Test_AddUser_FieldEmpty_Citizenship() {
         assertThrows(IllegalArgumentException.class, () -> {
             InformationCollection user = new InformationCollection(
-                    new BasicInformation("Matti", "Meikäläinen", "010101-1234", "", "Mies"),
-                    new ContactInformation("010101-1234", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
+                    new BasicInformation("Matti", "Meikäläinen", "010101", "", "Mies"),
+                    new ContactInformation("010101", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
             );
             IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
                 userRepository.addUser(user);;
@@ -151,8 +137,8 @@ class BasicInformationTest {
     public void Test_AddUser_FieldEmpty_Gender() {
         assertThrows(IllegalArgumentException.class, () -> {
             InformationCollection user = new InformationCollection(
-                    new BasicInformation("Matti", "Meikäläinen", "010101-1234", "Suomi", ""),
-                    new ContactInformation("010101-1234", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
+                    new BasicInformation("Matti", "Meikäläinen", "010101", "Suomi", ""),
+                    new ContactInformation("010101", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "11111")
             );
             IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
                 userRepository.addUser(user);;
