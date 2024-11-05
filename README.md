@@ -34,13 +34,13 @@ Esimerkkirunko käyttäjätietojen lisäämistä varten:
   "basicInformation": {
     "firstName": "Matti",
     "surname": "Meikäläinen",
-    "personalIdentityCode": "010101-1234",
+    "personalIdentityCode": "010101",
     "citizenship": "Suomi",
     "gender": "Mies",
     "fullName": "Matti Meikäläinen"
   },
   "contactInformation": {
-    "personalIdentityCode": "010101-1234",
+    "personalIdentityCode": "010101",
     "email": "matti.meikalainen@esimerkki.com",
     "phoneNumber": "040-123456",
     "streetAddress": "Esimerkkikatu",

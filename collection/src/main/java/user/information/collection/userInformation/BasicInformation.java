@@ -101,7 +101,7 @@ public class BasicInformation {
         if (code == null) {
             return false;
         }
-        return code.matches("\\d{6}-\\d{4}");
+        return code.matches("\\d{6}");
     }
 
     @Override

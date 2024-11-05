@@ -23,8 +23,8 @@ class InformationServiceTest {
 	public void setUp() {
 		userRepository = new InformationService();
 
-		BasicInformation basicInfo = new BasicInformation("Matti", "Meikäläinen", "010101-1234", "Suomi", "Mies");
-		ContactInformation contactInfo = new ContactInformation("010101-1234", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "00000");
+		BasicInformation basicInfo = new BasicInformation("Matti", "Meikäläinen", "010101", "Suomi", "Mies");
+		ContactInformation contactInfo = new ContactInformation("010101", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "00000");
 		InformationCollection user = new InformationCollection(basicInfo, contactInfo);
 
 		userRepository.addUser(user);
@@ -32,8 +32,8 @@ class InformationServiceTest {
 
 	@Test
 	public void Test_AddUser() {
-		BasicInformation basicInfo = new BasicInformation("Elli", "Esimerkki", "020202-6789", "Suomi", "Nainen");
-		ContactInformation contactInfo = new ContactInformation("020202-6789", "elli.esimerkki@esimerkki.com", "050-987654", "Ellikatu", "Esimerkki", "00500");
+		BasicInformation basicInfo = new BasicInformation("Elli", "Esimerkki", "020202", "Suomi", "Nainen");
+		ContactInformation contactInfo = new ContactInformation("020202", "elli.esimerkki@esimerkki.com", "050-987654", "Ellikatu", "Esimerkki", "00500");
 		InformationCollection user = new InformationCollection(basicInfo, contactInfo);
 
 		userRepository.addUser(user);
@@ -46,7 +46,7 @@ class InformationServiceTest {
 
 	@Test
 	public void Test_RemoveUser() {
-		userRepository.removeUserByPersonalIdentityCode("010101-1234");
+		userRepository.removeUserByPersonalIdentityCode("010101");
 
 		List<InformationCollection> users = userRepository.getAllUsers();
 		assertTrue(users.isEmpty());
@@ -54,7 +54,7 @@ class InformationServiceTest {
 
 	@Test
 	public void Test_RemoveUser_UserNotFoundByIdentityCode() {
-		String nonExistentPersonalIdentityCode = "123456-7890";
+		String nonExistentPersonalIdentityCode = "123456";
 
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
 			userRepository.removeUserByPersonalIdentityCode(nonExistentPersonalIdentityCode);
@@ -68,11 +68,11 @@ class InformationServiceTest {
 	@Test
 	public void Test_UpdateUser() {
 
-		BasicInformation updatedBasicInfo = new BasicInformation("Matti", "Virtanen", "010101-1234", "Suomi", "Mies");
-		ContactInformation updatedContactInfo = new ContactInformation("010101-1234", "matti.virtanen@esimerkki.com", "040-987654", "Virtasenkatu", "Tampere", "33100");
+		BasicInformation updatedBasicInfo = new BasicInformation("Matti", "Virtanen", "010101", "Suomi", "Mies");
+		ContactInformation updatedContactInfo = new ContactInformation("010101", "matti.virtanen@esimerkki.com", "040-987654", "Virtasenkatu", "Tampere", "33100");
 		InformationCollection updatedUser = new InformationCollection(updatedBasicInfo, updatedContactInfo);
 
-		userRepository.updateUser("010101-1234", updatedUser);
+		userRepository.updateUser("010101", updatedUser);
 
 		InformationCollection fetchedUser = userRepository.getAllUsers().get(0);
 		assertEquals("Matti", fetchedUser.getBasicInformation().getFirstName());
@@ -85,23 +85,23 @@ class InformationServiceTest {
 	@Test
 	public void Test_UpdateUser_UserNotFoundByIdentityCode() {
 
-		BasicInformation updatedBasicInfo = new BasicInformation("Matti", "Virtanen", "020202-5678", "Suomi", "Mies");
-		ContactInformation updatedContactInfo = new ContactInformation("020202-5678", "matti.virtanen@esimerkki.com", "040-987654", "Virtasenkatu", "Tampere", "33100");
+		BasicInformation updatedBasicInfo = new BasicInformation("Matti", "Virtanen", "020202", "Suomi", "Mies");
+		ContactInformation updatedContactInfo = new ContactInformation("020202", "matti.virtanen@esimerkki.com", "040-987654", "Virtasenkatu", "Tampere", "33100");
 		InformationCollection updatedUser = new InformationCollection(updatedBasicInfo, updatedContactInfo);
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			userRepository.updateUser("999999-9999", updatedUser);
+			userRepository.updateUser("999999", updatedUser);
 		}, USER_NOT_FOUND_MESSAGE);
 	}
 
 	@Test
 	public void Test_GetUserByPersonalIdentityCode() {
 
-		InformationCollection foundUser = userRepository.getUserByPersonalIdentityCode("010101-1234");
+		InformationCollection foundUser = userRepository.getUserByPersonalIdentityCode("010101");
 
 		assertNotNull(foundUser);
 		assertEquals("Matti", foundUser.getBasicInformation().getFirstName());
-		assertEquals("010101-1234", foundUser.getBasicInformation().getPersonalIdentityCode());
+		assertEquals("010101", foundUser.getBasicInformation().getPersonalIdentityCode());
 
 		System.out.println("User found: " + foundUser.getBasicInformation().getFirstName() +
 				" " + foundUser.getBasicInformation().getSurname() +
@@ -111,7 +111,7 @@ class InformationServiceTest {
 	@Test
 	void Test_GetUserByPersonalIdentityCode_UserNotFoundByIdentityCode() {
 
-		String nonExistentCode = "999999-9999";
+		String nonExistentCode = "999999";
 
 		IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
 			userRepository.getUserByPersonalIdentityCode(nonExistentCode);
@@ -122,8 +122,8 @@ class InformationServiceTest {
 
 	@Test
 	public void Test_AddUser_DuplicatePersonalIdentityCode() {
-		BasicInformation basicInfo = new BasicInformation("Matti", "Meikäläinen", "010101-1234", "Suomi", "Mies");
-		ContactInformation contactInfo = new ContactInformation("010101-1234", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "00000");
+		BasicInformation basicInfo = new BasicInformation("Matti", "Meikäläinen", "010101", "Suomi", "Mies");
+		ContactInformation contactInfo = new ContactInformation("010101", "matti.meikalainen@esimerkki.com", "040-123456", "Esimerkkikatu", "Esimerkki", "00000");
 		InformationCollection user = new InformationCollection(basicInfo, contactInfo);
 
 		IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
